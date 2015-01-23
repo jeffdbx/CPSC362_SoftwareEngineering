@@ -20,9 +20,7 @@ using System.Windows.Media.Animation;
 
 namespace PropertyManagement
 {
-    /// <summary>
-    /// Interaction logic for ManagePage.xaml
-    /// </summary>
+    // This class implements the logic that interacts with ManagePage.xaml
     public partial class ManagePage : Page
     {
         string propertyID;
@@ -42,7 +40,9 @@ namespace PropertyManagement
             propertyName = name;
             mainHeader.Content = "Manage: " + propertyName;
 
-            RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+            RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = 
+                new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+
             unitsDataGrid.DataContext = myAdapter.GetUnitsByID(Convert.ToInt32(propertyID));
 
             editUnitsGrid.IsEnabled = false;
@@ -53,13 +53,13 @@ namespace PropertyManagement
             petsComboBox.Items.Add(2);
             petsComboBox.Items.Add(3);
             petsComboBox.Items.Add(4);
-
         }
 
         //----------------------------------------------------------------------------------------
-        // These 2 functions are used to automatically disable/enable certain buttons if depending
+        //----------------------------------------------------------------------------------------
+        // These 2 functions are used to automatically disable/enable certain buttons depending
         // on if there are errors on the form.  For example, this code disables the Update button
-        // under "Edit Property" if there are textboxes with erros in them.
+        // under "Edit Property" if there are textboxes with errors in them.
         private void CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = IsValid(sender as DependencyObject);
@@ -74,6 +74,7 @@ namespace PropertyManagement
                 .OfType<DependencyObject>()
                 .All(child => IsValid(child));
         }
+        //----------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -107,7 +108,9 @@ namespace PropertyManagement
                 DataRowView row = (DataRowView)unitsDataGrid.SelectedItems[0];
                 unitNum = row["UNIT_ID"].ToString();
 
-                RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = 
+                    new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+
                 tenantDataGrid.DataContext = tenantAdapter.GetTenantByUnitNum(Convert.ToInt32(propertyID), unitNum);
             }
             catch (System.Exception ex)
@@ -304,7 +307,9 @@ namespace PropertyManagement
         private void clearTenantFormButton_Click(object sender, RoutedEventArgs e)
         {
             ClearTenantForms();
-            RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+            RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = 
+                new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+
             tenantDataGrid.DataContext = myAdapter.GetTenantByUnitNum(Convert.ToInt32(propertyID), unitNum);
         }
 
@@ -329,21 +334,24 @@ namespace PropertyManagement
 
         private void addUnitButton_Click(object sender, RoutedEventArgs e)
         {
-
             // Force the user to at least enter a unit number.
             if (!string.IsNullOrWhiteSpace(unitNumBox.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this unit?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this unit?", 
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
                         // Create an instance of an adapter to allow us to add new units to the database.
-                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
 
                         // Add the new unit using all of the data from our UI textboxes.
-                        // The Access database we are using generates an error if we try to submit an empty values for the following fields.
-                        // For some reason a simple unary operater doesn't work here:   (petsComboBox.SelectedIndex == 1) ? true : false
+                        // The Access database we are using generates an error if we try to submit an empty values 
+                        // for the following fields. For some reason a simple unary operater doesn't work here:   
+                        // (petsComboBox.SelectedIndex == 1) ? true : false
                         int pets = 0;
                         if (petsComboBox.Text != "")
                             pets = petsComboBox.SelectedIndex;
@@ -372,11 +380,9 @@ namespace PropertyManagement
                         if (depositBox.Text != "")
                             deposit = Convert.ToDecimal(depositBox.Text);
 
-
                         // Insert the new unit.
-                        myAdapter.InsertUnit(Convert.ToInt32(propertyID), unitNumBox.Text, bathQty, bedrQty, floorNumber, pets,
-                                              sqFt, mthlyRent, deposit, notesBox.Text);
-
+                        myAdapter.InsertUnit(Convert.ToInt32(propertyID), unitNumBox.Text, bathQty, bedrQty, floorNumber, 
+                                             pets, sqFt, mthlyRent, deposit, notesBox.Text);
 
                         // Update our unit DataGrid box on the main page, showing the newly added unit.
                         unitsDataGrid.DataContext = myAdapter.GetUnitsByID(Convert.ToInt32(propertyID));
@@ -388,7 +394,6 @@ namespace PropertyManagement
                         editUnitsGrid.IsEnabled = false;
                         editTenantGrid.IsEnabled = false;
 
-
                         // This animates the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
                         imageAnimation.From = 0;
@@ -396,7 +401,6 @@ namespace PropertyManagement
                         imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                         imageAnimation.AutoReverse = true;
                         checkMark.BeginAnimation(OpacityProperty, imageAnimation);
-
                     }
                     catch (System.Exception ex)
                     {
@@ -416,14 +420,19 @@ namespace PropertyManagement
                 System.Windows.MessageBox.Show("Please select a unit to delete.");
             else
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this unit?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this unit?", 
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
                         // Create an instance of an adapter to allow us to add new units to the database.
-                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
-                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+
+                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
 
                         // This creates an instance of one entire row of the currently selected unit in the DataGrid.
                         DataRowView row = (DataRowView)unitsDataGrid.SelectedItems[0];
@@ -477,7 +486,9 @@ namespace PropertyManagement
                 // Make sure that the user has provided at least a unit number before attempting to update.
                 if (!string.IsNullOrWhiteSpace(unitNumBox.Text))
                 {
-                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this unit?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this unit?", 
+                        "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                     if (result == MessageBoxResult.Yes)
                     {
                         try
@@ -511,7 +522,8 @@ namespace PropertyManagement
                                 deposit = Convert.ToDecimal(depositBox.Text);
 
                             DataRowView row = (DataRowView)unitsDataGrid.SelectedItems[0];
-                            RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+                            RentAwareDBDataSetTableAdapters.rw_unitTableAdapter myAdapter = 
+                                new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
 
                             myAdapter.UpdateUnit(unitNumBox.Text, bathQty, bedrQty, floorNumber, pets, sqFt, mthlyRent,
                                                  deposit, notesBox.Text, (int)row["UNIT_NO"]);
@@ -546,13 +558,14 @@ namespace PropertyManagement
             // Force the user to at least enter a unit number.
             if (!string.IsNullOrWhiteSpace(lastNmBox.Text))
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this tenant?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this tenant?", 
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
-                        // The Access database we are using generates an error if we try to submit an empty values for the following fields.
-
+                        // The Access database we are using generates an error if we try to submit an empty values 
+                        // for the following fields.
                         decimal dueAmount = 0;
                         if (amountDue.Text != "")
                             dueAmount = Convert.ToDecimal(amountDue.Text);
@@ -570,7 +583,8 @@ namespace PropertyManagement
                             rentalPicker.SelectedDate = DateTime.Now;
 
                         // Create an instance of an adapter to allow us to add new units to the database.
-                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
 
                         // Add the new tenant using all of the data from our UI textboxes.
                         myAdapter.InsertTenant(Convert.ToInt32(propertyID), unitNum, firstNmBox.Text, lastNmBox.Text,
@@ -610,13 +624,16 @@ namespace PropertyManagement
                 System.Windows.MessageBox.Show("Please select a tenant to delete.");
             else
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this tenant?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this tenant?", 
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
                         // Create an instance of an adapter to allow us to delete tenants from the database.
-                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
 
                         // This creates an instance of one entire row of the currently selected tenant in the DataGrid.
                         DataRowView row = (DataRowView)tenantDataGrid.SelectedItems[0];
@@ -639,7 +656,6 @@ namespace PropertyManagement
                         imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                         imageAnimation.AutoReverse = true;
                         tenantCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
-
                     }
                     catch (System.Exception ex)
                     {
@@ -653,18 +669,18 @@ namespace PropertyManagement
         {
             if (tenantDataGrid.SelectedIndex > (-1) && tenantDataGrid.SelectedIndex < tenantDataGrid.Items.Count)
             {
-
                 // Make sure that the user has provided at least a unit number before attempting to update.
                 if (!string.IsNullOrWhiteSpace(lastNmBox.Text))
                 {
-                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this tenant?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this tenant?", 
+                        "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                     if (result == MessageBoxResult.Yes)
                     {
                         try
                         {
-
-                            // The Access database we are using generates an error if we try to submit an empty values for the following fields.
-                           
+                            // The Access database we are using generates an error if we try to submit an empty 
+                            // values for the following fields.
                             decimal dueAmount = 0;
                             if (amountDue.Text != "")
                                 dueAmount = Convert.ToDecimal(amountDue.Text);
@@ -682,7 +698,9 @@ namespace PropertyManagement
                                 rentalPicker.SelectedDate = DateTime.Now;
 
                             // Create an instance of an adapter to allow us to update a tenant in the database.
-                            RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                            RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter myAdapter = 
+                                new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+
                             DataRowView row = (DataRowView)tenantDataGrid.SelectedItems[0];
 
                             myAdapter.UpdateTenant(firstNmBox.Text, lastNmBox.Text,
@@ -704,7 +722,6 @@ namespace PropertyManagement
                             imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                             imageAnimation.AutoReverse = true;
                             tenantCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
-
                         }
                         catch (System.Exception ex)
                         {
@@ -721,7 +738,6 @@ namespace PropertyManagement
             {
                 System.Windows.MessageBox.Show("Please select a tenant to update.");
             }
-
         }
     }
 }

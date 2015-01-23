@@ -34,10 +34,12 @@ namespace PropertyManagement
         {
             InitializeComponent();
 
-            //This is an adapter that allows for communication between the WPF UI and the database. Basically, this is created
-            // by creating a DataSet (the .xsd file in Solution Explorer).  The dataset provides generated DB connection code for us.
-            // We simply create an adapter instance, then do our insert, delete, and update queries through it.
-            RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
+            // This is an adapter that allows for communication between the WPF UI and the database. Basically, 
+            // this is created by creating a DataSet (the .xsd file in Solution Explorer).  The dataset provides
+            // generated DB connection code for us.  We simply create an adapter instance, then do our insert,
+            // delete, and update queries through it.
+            RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = 
+                new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
             
             // The DataContext is what our GridView, ListBoxes, etc. use to populate their fields.
             propertyDataGrid.DataContext = myAdapter.GetProperties();
@@ -64,9 +66,9 @@ namespace PropertyManagement
 
         //----------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------
-        // These 2 functions are used to automatically disable/enable certain buttons if depending
+        // These 2 functions are used to automatically disable/enable certain buttons depending
         // on if there are errors on the form.  For example, this code disables the Update button
-        // under "Edit Property" if there are textboxes with erros in them.
+        // under "Edit Property" if there are textboxes with errors in them.
         private void CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = IsValid(sender as DependencyObject);
@@ -91,22 +93,29 @@ namespace PropertyManagement
                 System.Windows.MessageBox.Show("Please select a property to delete.");
             else
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this property?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to delete this property?", 
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     try
                     {
                         // Create an instance of each adapter to allow us to delete properties from the database.
-                        RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter propertyAdapter = new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
-                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter unitAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
-                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
+                        RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter propertyAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
+
+                        RentAwareDBDataSetTableAdapters.rw_unitTableAdapter unitAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
+
+                        RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = 
+                            new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
                         
-                        // This creates an instance of one entire row of the currently selected property in the DataGrid.  Meaning, if
-                        // "Bell Gardens Apartments" is selected, then all of it's row data is available here.
+                        // This creates an instance of one entire row of the currently selected property in the DataGrid.  
+                        // Meaning, if "Bell Gardens Apartments" is selected, then all of it's row data is available here.
                         DataRowView row = (DataRowView)propertyDataGrid.SelectedItems[0];
 
-                        // Delete the currently selected property.  "DeleteProperty" is a custom query setup that searches for the
-                        // property ID and then deletes that corresponding property from the database.
+                        // Delete the currently selected property.  "DeleteProperty" is a custom query setup that searches 
+                        // for the property ID and then deletes that corresponding property from the database.
                         propertyAdapter.DeleteProperty((int)row["PROP_ID"]);
 
                         // Delete all of the units that were associated with the property we just deleted.
@@ -116,8 +125,9 @@ namespace PropertyManagement
                         tenantAdapter.DeleteTenantByPropertyID((int)row["PROP_ID"]);
 
                         // Update our property DataGrid box on the main page, showing that the deleted property is indeed gone.
-                        // NOTE: This next line is throwing a vague exception and I don't know why.  However everything continues working
-                        //       fine, so I just disabled the error message that pops up. Not the best solution, but it works for now.
+                        // NOTE: This next line is throwing a vague exception and I don't know why.  However everything 
+                        //       continues working fine, so I just disabled the error message that pops up. Not the best 
+                        //       solution, but it works for now.
                         propertyDataGrid.DataContext = propertyAdapter.GetProperties();
 
                         // Animate the success check mark
@@ -127,13 +137,11 @@ namespace PropertyManagement
                         imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                         imageAnimation.AutoReverse = true;
                         propertyCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
-
                     }
                     catch (System.Exception ex)
                     {
                         System.Windows.MessageBox.Show("Delete Property failed.\n\n" + ex.Message);
                     }
-                    
                 }
             }
         }
@@ -141,25 +149,29 @@ namespace PropertyManagement
         // Add a property.
         private void AddPropertyButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this property?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to add this property?", 
+                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
             if (result == MessageBoxResult.Yes)
             {
                 try
                 {
                     // Create an instance of an adapter to allow us to add properties to the database.
-                    RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
+                    RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = 
+                        new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
                         
-                    // The Access database we are using generates an error if we try to submit an empty value for PROP_UNITS_QTY. So this little
-                    // bit of code simply sets the units quantity to zero if the totalUnitsBox (in the UI) is empty.
+                    // The Access database we are using generates an error if we try to submit an empty value 
+                    // for PROP_UNITS_QTY. So this little bit of code simply sets the units quantity to zero 
+                    // if the totalUnitsBox (in the UI) is empty.
                     short units = 0;
                     if (totalUnitsBox.Text != "")
                         units = Convert.ToInt16(totalUnitsBox.Text);
 
-                    // Add the property using all of the data from our UI textboxes.  I had to update the Access database to allow for empty values.
-                    // Before, if there was an empty value in any of these boxes, the database would complain.  Now the only required value is that 
-                    // the user provides a property name.
-                    myAdapter.InsertProperty(nameBox.Text, addressBox.Text, cityBox.Text, zipBox.Text, stateBox.Text, units, mgrBox.Text,
-                                                mgrUnitBox.Text, mgrPhoneBox.Text, commentsBox.Text, onlyImageFileName);
+                    // Add the property using all of the data from our UI textboxes.  I had to update the Access database to 
+                    // allow for empty values. Before, if there was an empty value in any of these boxes, the database would 
+                    // complain. Now the only required value is that the user provides a property name. 
+                    myAdapter.InsertProperty(nameBox.Text, addressBox.Text, cityBox.Text, zipBox.Text, stateBox.Text, units, 
+                                             mgrBox.Text, mgrUnitBox.Text, mgrPhoneBox.Text, commentsBox.Text, onlyImageFileName);
 
                     if (userIsEditingTheImage)
                     {
@@ -215,17 +227,18 @@ namespace PropertyManagement
             // Bounds checking! Leave this if statement here or bad things will happen!
             if (propertyDataGrid.SelectedIndex > (-1) && propertyDataGrid.SelectedIndex < propertyDataGrid.Items.Count)
             {
-                // Just like in our Add Property and Delete Property functions, we want to grab all of the data in the currently
-                // selected property's row.
+                // Just like in our Add Property and Delete Property functions, we want to grab all of the data in the 
+                // currently selected property's row.
                 DataRowView row = (DataRowView)propertyDataGrid.SelectedItems[0];
 
                 propertyID = row["PROP_ID"].ToString();
                 propertyName = row["PROP_NAME"].ToString();
 
-                // This code is used for the property ImageBox but is little confusing. What it is doing is making sure that the path
-                // to the image files is relative to where the PropertyManagement .exe is being run. Basically, "GetExecutingAssembly().Location"
-                // returns the path of where the .exe is running. However, we need to strip "\PropertyManagement.exe" from that string because
-                // we only want the working directory of where that .exe resides to use for our images path.
+                // This code is used for the property ImageBox but is little confusing. What it is doing is making sure 
+                // that the path to the image files is relative to where the PropertyManagement .exe is being run.
+                // Basically, "GetExecutingAssembly().Location" returns the path of where the .exe is running. However,
+                // we need to strip "\PropertyManagement.exe" from that string because we only want the working directory
+                // of where that .exe resides to use for our images path.
                 const string removeString = "\\PropertyManagement.exe";
                 string sourceString = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 int index = sourceString.IndexOf(removeString);
@@ -233,8 +246,8 @@ namespace PropertyManagement
 
                 try
                 {
-                    // This opens up one of the images within the same directory that our .exe is running in and displays it in our
-                    // property ImageBox on the home page.
+                    // This opens up one of the images within the same directory that our .exe is running in and displays 
+                    // it in our property ImageBox on the home page.
                     string path = myString + @"\" + row["PROP_PICTURE"];
                     PictureBoxImage1.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
                 }
@@ -242,10 +255,12 @@ namespace PropertyManagement
                 {
                     try
                     {
-                        // If the property image does not exist (for example, "1.jpg"), then use the "No Image Available" .jpg as default
-                        //string path = myString + @"\none.jpg";
-                        //PictureBoxImage1.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
-                        string baseDir = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                        // If the property image does not exist (for example, "1.jpg"), then use the "No Image Available" 
+                        // jpeg as default.
+                        // string path = myString + @"\none.jpg";
+                        // PictureBoxImage1.Source = new BitmapImage(new Uri(path, UriKind.RelativeOrAbsolute));
+                        string baseDir = 
+                            System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                         PictureBoxImage1.Source = new BitmapImage(new Uri(baseDir + @"\none.jpg", UriKind.RelativeOrAbsolute));
                     }
                     catch (System.Exception ex1)
@@ -253,7 +268,6 @@ namespace PropertyManagement
                         // If for some reason the "No Image Available" .jpg isn't found, then just leave the ImageBox blank.
                         PictureBoxImage1.Source = null;
                     }
-
                 }
             }
             addButton.IsEnabled = false;
@@ -345,7 +359,6 @@ namespace PropertyManagement
                 updateButton.IsEnabled = true;
                 addButton.IsEnabled = false;
             }
-
         }
 
         private void ClearFormButton_Click(object sender, RoutedEventArgs e)
@@ -392,22 +405,24 @@ namespace PropertyManagement
                 // Make sure that the user has provided at least a property name before attempting to update.
                 if (!string.IsNullOrWhiteSpace(nameBox.Text))
                 {
-                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this property?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = System.Windows.MessageBox.Show("Are you sure you want to update this property?", 
+                        "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
                     if (result == MessageBoxResult.Yes)
                     {
                         try
                         {
                             DataRowView row = (DataRowView)propertyDataGrid.SelectedItems[0];
-                            RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
+                            RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = 
+                                new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
                             
-
                             short units = 0;
                             if (totalUnitsBox.Text != "")
                                 units = Convert.ToInt16(totalUnitsBox.Text);
 
-                            myAdapter.UpdateProperty(nameBox.Text, addressBox.Text, cityBox.Text, zipBox.Text, stateBox.Text, units, mgrBox.Text,
-                                                        mgrUnitBox.Text, mgrPhoneBox.Text, commentsBox.Text, (int)(row["PROP_ID"]));
-
+                            myAdapter.UpdateProperty(nameBox.Text, addressBox.Text, cityBox.Text, zipBox.Text, stateBox.Text, 
+                                                     units, mgrBox.Text, mgrUnitBox.Text, mgrPhoneBox.Text, commentsBox.Text, 
+                                                     (int)(row["PROP_ID"]));
 
                             if (userIsEditingTheImage)
                             {
@@ -421,8 +436,8 @@ namespace PropertyManagement
                                 }
                                 catch (System.Exception ex)
                                 {
-                                    // This will throw an error if I try to pick the same image that is already set as the current 
-                                    // properties image.
+                                    // This will throw an error if I try to pick the same image that is already set  
+                                    // as the current properties image.
                                      System.Windows.MessageBox.Show("Attempting to Update image failed.\n\n" + ex.Message);
                                 }
                                 userIsEditingTheImage = false;
@@ -438,7 +453,6 @@ namespace PropertyManagement
                             imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                             imageAnimation.AutoReverse = true;
                             propertyCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
-                           
                         }
                         catch (System.Exception ex)
                         {
@@ -469,7 +483,9 @@ namespace PropertyManagement
             // then just leave the ImageBox blank.
             try
             {
-                string baseDir = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                string baseDir = 
+                    System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+
                 PictureBoxImage1.Source = new BitmapImage(new Uri(baseDir + @"\none.jpg", UriKind.RelativeOrAbsolute));
             }
             catch (System.Exception ex)
@@ -484,15 +500,15 @@ namespace PropertyManagement
         {
             userIsEditingTheImage = true;
 
-            // This allows the user to go out and add whatever picture they want.  This code forces the user to only pick a .jpg as
-            // their choice.  This code is not fully functional yet. It does not make any changes to the database.
+            // This allows the user to go out and add whatever picture they want.  This code forces the user to only 
+            // pick a .jpg as their choice.  This code is not fully functional yet. It does not make any changes to 
+            // the database.
             Microsoft.Win32.OpenFileDialog openfile = new Microsoft.Win32.OpenFileDialog();
             openfile.DefaultExt = "*.jpg";
             openfile.Filter = "Image Files|*.jpg";
             Nullable<bool> result = openfile.ShowDialog();
             if (result == true)
             {
-
                 sourcePath = openfile.FileName;
                 onlyImageFileName = System.IO.Path.GetFileName(openfile.FileName);
                 
