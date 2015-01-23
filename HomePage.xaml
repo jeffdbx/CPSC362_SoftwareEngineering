@@ -1,36 +1,52 @@
-﻿<Page x:Class="PropertyManagement.HomePage"
+﻿<!-- This file controls the UI layout of the starting home page of the application -->
+
+<Page x:Class="PropertyManagement.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:custom="clr-namespace:PropertyManagement"
       xmlns:src="clr-namespace:PropertyManagement"
-      mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="800"
-	  KeepAlive="True" Title="Home" ShowsNavigationUI="False">
-    <!-- "KeepAlive = True", My god what a pain in the ass! This little bit of code is needed to keep data between
-         pages from magically disappearing.  Sigh.-->
-    
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="800"
+      KeepAlive="True"
+      Title="Home"
+      ShowsNavigationUI="False">
+    <!-- "KeepAlive = True", This little bit of code is needed to keep data between pages 
+      from magically disappearing. Sigh. -->
+
     <Page.Resources>
-        <src:ValidateData x:Key="data"/>
+        <src:ValidateData x:Key="data" />
 
         <!--The tool tip for the TextBox to display the validation error message.
         <Style x:Key="textBoxInError" TargetType="TextBox">-->
         <Style  TargetType="{x:Type TextBox}">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,40,2" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,2,40,2" />
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel LastChildFill="true">
-                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" 
-                                Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
-                                   FontWeight="Bold" Foreground="white" />
+                            <Border Background="Red"
+                                    DockPanel.Dock="right"
+                                    Margin="5,0,0,0"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="5"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!"
+                                           VerticalAlignment="center"
+                                           HorizontalAlignment="center"
+                                           FontWeight="Bold"
+                                           Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
-                                <Border BorderBrush="red" BorderThickness="1" />
+                            <AdornedElementPlaceholder Name="customAdorner"
+                                                       VerticalAlignment="Center">
+                                <Border BorderBrush="red"
+                                        BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
                     </ControlTemplate>
@@ -39,178 +55,386 @@
         </Style>
     </Page.Resources>
 
-
     <!--This creates the grid layout-->
-    <Grid Name="grid" Margin="10,0,10,10">
+    <Grid Name="grid"
+          Margin="10,0,10,10">
         <Grid Margin="0,0,0,-27">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="719" />
                 <ColumnDefinition Width="41" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="82"/>
-                <RowDefinition Height="176"/>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="82" />
+                <RowDefinition Height="176" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="197" />
                 <RowDefinition Height="120" />
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
+
             <!-- "Property Management" header -->
-            <Label Grid.Row="1" Style="{StaticResource headerTextStyle}" Margin="0,52,111,0" Grid.Column="1">
+            <Label Grid.Row="1"
+                   Style="{StaticResource headerTextStyle}"
+                   Margin="0,52,111,0"
+                   Grid.Column="1">
                 Property Management
             </Label>
-            <Image Source="house.jpg" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" 
-                   Width="101" Margin="0,0,0,165" Grid.RowSpan="2"  Opacity="1"/>
-            <Image Source="logo.png" HorizontalAlignment="Right" 
-                   Width="191" Margin="0,2,527,19" Grid.RowSpan="2"  Opacity="1" Grid.Column="1" />
+            <Image Source="house.jpg"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Width="101"
+                   Margin="0,0,0,165"
+                   Grid.RowSpan="2"
+                   Opacity="1" />
+            <Image Source="logo.png"
+                   HorizontalAlignment="Right"
+                   Width="191"
+                   Margin="0,2,527,19"
+                   Grid.RowSpan="2"
+                   Opacity="1"
+                   Grid.Column="1" />
+
             <!--This is the blue bar above the list box that says "Properties Inventory"-->
-            <Border Grid.Row="2" Style="{StaticResource listHeaderStyle}" Margin="0,6,0,135" Grid.Column="1">
+            <Border Grid.Row="2"
+                    Style="{StaticResource listHeaderStyle}"
+                    Margin="0,6,0,135"
+                    Grid.Column="1">
                 <Label Style="{StaticResource listHeaderTextStyle}">Properties Inventory</Label>
             </Border>
 
             <!-- Buttons -->
-            
-            <Button Grid.Column="1" Grid.Row="3" Click="ManageButton_Click" Style="{StaticResource buttonStyle}" Margin="348,5,0,0" HorizontalAlignment="Left" Width="85">Manage</Button>
-            <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource buttonStyle}" Margin="0,5,107,0" Width="85" Click="DeleteButton_Click">Delete</Button>
-            <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource buttonStyle}" Margin="0,5,197,0" Width="85" Click="EditButton_Click">Edit</Button>
-            <Button Style="{StaticResource buttonStyle}" Margin="0,5,0,0" Width="101" Content="New Property" Grid.Column="1" Grid.Row="3" Click="AddNewProperty_Button_Click"></Button>
-            
-            <Grid Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="0,21,0,4" Name="editPropertyGrid" Width="719" Grid.RowSpan="2">
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Click="ManageButton_Click"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="348,5,0,0"
+                    HorizontalAlignment="Left"
+                    Width="85">Manage</Button>
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="0,5,107,0"
+                    Width="85"
+                    Click="DeleteButton_Click">Delete</Button>
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="0,5,197,0"
+                    Width="85"
+                    Click="EditButton_Click">Edit</Button>
+            <Button Style="{StaticResource buttonStyle}"
+                    Margin="0,5,0,0"
+                    Width="101"
+                    Content="New Property"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    Click="AddNewProperty_Button_Click"></Button>
+
+            <Grid Grid.Column="1"
+                  Grid.Row="4"
+                  HorizontalAlignment="Left"
+                  Margin="0,21,0,4"
+                  Name="editPropertyGrid"
+                  Width="719"
+                  Grid.RowSpan="2">
                 <Grid.CommandBindings>
-                    <CommandBinding Command="New" CanExecute="CanExecute"  />
+                    <CommandBinding Command="New"
+                                    CanExecute="CanExecute" />
                 </Grid.CommandBindings>
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="313,11,0,0"  Name="nameBox"    VerticalAlignment="Top" Width="120" MaxLength="255">
+
+                <!--All of our textboxes.  Many of them use "Binding.ValidationRules" to validate user input. -->
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="313,11,0,0"
+                         Name="nameBox"
+                         VerticalAlignment="Top"
+                         Width="120"
+                         MaxLength="255">
                     <TextBox.Text>
                         <!-- Setting the ValidatesOnDataErrors to true enables the Binding to check for
-                    errors raised by the IDataErrorInfo implementation.
-                    Alternatively, you can add DataErrorValidationRule to <Binding.ValidationRules/>-->
-                        <Binding NotifyOnValidationError="True" Path="Name" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <!-- Checks for exceptions during the setting of the source property.
-                            Alternatively, set ValidatesOnExceptions to True on the Binding.-->
-                                <ExceptionValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="313,41,0,0"  Name="addressBox" VerticalAlignment="Top" Width="120" MaxLength="255">
-                    <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="Address" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="313,73,0,0"  Name="cityBox"    VerticalAlignment="Top" Width="120" MaxLength="50">
-                    <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="City" Source="{StaticResource data}"
-                             ValidatesOnDataErrors="True"   
-                             UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="313,104,0,0" Name="stateBox"   VerticalAlignment="Top" Width="120" MaxLength="20">
-                    <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="State" Source="{StaticResource data}"
-                                 ValidatesOnDataErrors="True"   
+                        errors raised by the IDataErrorInfo implementation. Alternatively, you can add 
+                        DataErrorValidationRule to <Binding.ValidationRules/> -->
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Name"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
                                  UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <!-- Checks for exceptions during the setting of the source property.
+                                Alternatively, set ValidatesOnExceptions to True on the Binding.-->
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="313,133,0,0" Name="zipBox"     VerticalAlignment="Top" Width="120" MaxLength="5">
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="313,41,0,0"
+                         Name="addressBox"
+                         VerticalAlignment="Top"
+                         Width="120"
+                         MaxLength="255">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="Zip" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Address"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                
-                
-                <!--All of our textboxes-->
-                <TextBox Height="23" HorizontalAlignment="Right" Margin="0,9,6,0"    Name="totalUnitsBox" VerticalAlignment="Top" Width="133" MaxLength="3">
+
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="313,73,0,0"
+                         Name="cityBox"
+                         VerticalAlignment="Top"
+                         Width="120"
+                         MaxLength="50">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="Units" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="City"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="313,104,0,0"
+                         Name="stateBox"
+                         VerticalAlignment="Top"
+                         Width="120"
+                         MaxLength="20">
+                    <TextBox.Text>
+                        <Binding NotifyOnValidationError="True"
+                                 Path="State"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="313,133,0,0"
+                         Name="zipBox"
+                         VerticalAlignment="Top"
+                         Width="120"
+                         MaxLength="5">
+                    <TextBox.Text>
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Zip"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,9,6,0"
+                         Name="totalUnitsBox"
+                         VerticalAlignment="Top"
+                         Width="133"
+                         MaxLength="3">
+                    <TextBox.Text>
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Units"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,39,6,0"
+                         Name="mgrBox"
+                         VerticalAlignment="Top"
+                         Width="133"
+                         MaxLength="75" />
+                
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,70,6,0"
+                         Name="mgrPhoneBox"
+                         VerticalAlignment="Top"
+                         Width="133"
+                         MaxLength="20" />
+              
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="580,101,0,0"
+                         Name="mgrUnitBox"
+                         VerticalAlignment="Top"
+                         Width="133"
+                         MaxLength="3" />
 
-                <TextBox Height="23" HorizontalAlignment="Right" Margin="0,39,6,0"   Name="mgrBox"        VerticalAlignment="Top" Width="133" MaxLength="75" />
-                <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,70,6,0"  Name="mgrPhoneBox"   VerticalAlignment="Top" Width="133" MaxLength="20" />
-                <TextBox Height="23" HorizontalAlignment="Left"  Margin="580,101,0,0" Name="mgrUnitBox"    VerticalAlignment="Top" Width="133" MaxLength="3" />
-                <TextBox Height="47" HorizontalAlignment="Left"  Margin="0,224,0,0"  Name="commentsBox"   VerticalAlignment="Top" Width="713" MaxLength="255" />
+                <TextBox Height="47"
+                         HorizontalAlignment="Left"
+                         Margin="0,224,0,0"
+                         Name="commentsBox"
+                         VerticalAlignment="Top"
+                         Width="713"
+                         MaxLength="255" />
 
-                <!--All of our labels-->
-                <Label Content="Name*"           Height="28" HorizontalAlignment="Left" Margin="214,9,0,0"   VerticalAlignment="Top" />
-                <Label Content="Street Address*" Height="28" HorizontalAlignment="Left" Margin="214,39,0,0"  VerticalAlignment="Top" />
-                <Label Content="City*"           Height="28" HorizontalAlignment="Left" Margin="214,71,0,0"  VerticalAlignment="Top" />
-                <Label Content="State*"          Height="28" HorizontalAlignment="Left" Margin="214,101,0,0" VerticalAlignment="Top" />
-                <Label Content="Total Units*"    Height="28" HorizontalAlignment="Left" Margin="478,9,0,0"  VerticalAlignment="Top" />
-                <Label Content="Manager Name"   Height="28" HorizontalAlignment="Left" Margin="478,39,0,0"  VerticalAlignment="Top" />
-                <Label Content="Comments"       Height="28" HorizontalAlignment="Left" Margin="0,198,0,0"   VerticalAlignment="Top" />
-                <Label Content="Manager Unit"   Height="28" HorizontalAlignment="Left" Margin="478,101,0,0" VerticalAlignment="Top" />
-                <Label Content="Zip Code*"       Height="28" HorizontalAlignment="Left" Margin="214,128,0,0" VerticalAlignment="Top" />
-                <Label Content="Manager Phone"  Height="28" HorizontalAlignment="Left" Margin="478,71,0,0"  VerticalAlignment="Top" />
+                <!--All of our textbox labels-->
+                <Label Content="Name*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="214,9,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Street Address*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="214,39,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="City*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="214,71,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="State*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="214,101,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Total Units*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="478,9,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Manager Name"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="478,39,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Comments"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="0,198,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Manager Unit"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="478,101,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Zip Code*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="214,128,0,0"
+                       VerticalAlignment="Top" />
+                
+                <Label Content="Manager Phone"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="478,71,0,0"
+                       VerticalAlignment="Top" />
 
                 <!--The black border around our ImageBox-->
-                <Border Name="imageBorder" BorderThickness="2" BorderBrush="#0066cc" VerticalAlignment="Top" Height="150" HorizontalAlignment="Left" Width="200">
-                    <Image Height="150" Name="PictureBoxImage1" Stretch="UniformToFill" Width="200"  />
+                <Border Name="imageBorder"
+                        BorderThickness="2"
+                        BorderBrush="#0066cc"
+                        VerticalAlignment="Top"
+                        Height="150"
+                        HorizontalAlignment="Left"
+                        Width="200">
+                    <Image Height="150"
+                           Name="PictureBoxImage1"
+                           Stretch="UniformToFill"
+                           Width="200" />
                 </Border>
-                
-                
-                <!--The buttons in our editPropertyGrid-->
-                <Button Content="Edit Image" Height="23" HorizontalAlignment="Left" Margin="0,155,0,0" Name="editImageButton" VerticalAlignment="Top" Width="75" Click="editImageButton_Click" />
-                <Button Style="{StaticResource buttonStyle}" Margin="449,193,0,74" Width="85" Click="ClearFormButton_Click" Content="Clear Form" HorizontalAlignment="Left"></Button>
-                <Button Command="New" Style="{StaticResource buttonStyle}" Margin="0,193,95,74" Width="85" Content="Update" Click="updateButton_Click" Name="updateButton"></Button>
-                <Button Command="New" Style="{StaticResource buttonStyle}" Margin="0,193,6,74" Width="85" Click="AddPropertyButton_Click" Content="Add" Name="addButton" ></Button>
 
+                <!--The buttons in our editPropertyGrid-->
+                <Button Content="Edit Image"
+                        Height="23"
+                        HorizontalAlignment="Left"
+                        Margin="0,155,0,0"
+                        Name="editImageButton"
+                        VerticalAlignment="Top"
+                        Width="75"
+                        Click="editImageButton_Click" />
+                
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="449,193,0,74"
+                        Width="85"
+                        Click="ClearFormButton_Click"
+                        Content="Clear Form"
+                        HorizontalAlignment="Left"></Button>
+                
+                <Button Command="New"
+                        Style="{StaticResource buttonStyle}"
+                        Margin="0,193,95,74"
+                        Width="85"
+                        Content="Update"
+                        Click="updateButton_Click"
+                        Name="updateButton"></Button>
+                
+                <Button Command="New"
+                        Style="{StaticResource buttonStyle}"
+                        Margin="0,193,6,74"
+                        Width="85"
+                        Click="AddPropertyButton_Click"
+                        Content="Add"
+                        Name="addButton"></Button>
             </Grid>
 
             <!--This populates the propertyDataGrid with the data from our database-->
-            <DataGrid Name="propertyDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="0,41,0,0" Grid.Column="1" Grid.Row="2" Height="135" VerticalAlignment="Top" CanUserReorderColumns="True" 
-                      CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserSortColumns="True" GridLinesVisibility="None" SelectionChanged="propertyDataGrid_SelectionChanged"
-                      >
+            <DataGrid Name="propertyDataGrid"
+                      ItemsSource="{Binding}"
+                      AutoGenerateColumns="False"
+                      Margin="0,41,0,0"
+                      Grid.Column="1"
+                      Grid.Row="2"
+                      Height="135"
+                      VerticalAlignment="Top"
+                      CanUserReorderColumns="True"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      CanUserAddRows="False"
+                      CanUserSortColumns="True"
+                      GridLinesVisibility="None"
+                      SelectionChanged="propertyDataGrid_SelectionChanged">
                 <DataGrid.Columns>
-                    
-                    <!--<DataGridTemplateColumn Header="ID" Width="30" IsReadOnly="True" SortMemberPath="PROP_ID" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding PROP_ID}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
 
-                    <DataGridTemplateColumn Header="Name" Width="150" IsReadOnly="True" SortMemberPath="PROP_NAME" >
+                    <DataGridTemplateColumn Header="Name"
+                                            Width="150"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_NAME">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding PROP_NAME}" />
@@ -218,24 +442,32 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Address" Width="140" IsReadOnly="True" SortMemberPath="PROP_STRT_ADDR">
+                    <DataGridTemplateColumn Header="Address"
+                                            Width="140"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_STRT_ADDR">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding PROP_STRT_ADDR}"/>
+                                <TextBlock Text="{Binding PROP_STRT_ADDR}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="City" Width="100" IsReadOnly="True" SortMemberPath="PROP_CITY">
+                    <DataGridTemplateColumn Header="City"
+                                            Width="100"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_CITY">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding PROP_CITY}"/>
+                                <TextBlock Text="{Binding PROP_CITY}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-
-                    <DataGridTemplateColumn Header="Zip Code" Width="65" IsReadOnly="True" SortMemberPath="PROP_ZIP" >
+                    <DataGridTemplateColumn Header="Zip Code"
+                                            Width="65"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_ZIP">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding PROP_ZIP}" />
@@ -243,26 +475,48 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-
-                    <DataGridTemplateColumn Header="Units" Width="45" IsReadOnly="True" SortMemberPath="PROP_UNITS_QTY">
+                    <DataGridTemplateColumn Header="Units"
+                                            Width="45"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_UNITS_QTY">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding PROP_UNITS_QTY}"/>
+                                <TextBlock Text="{Binding PROP_UNITS_QTY}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Comments" Width="200" IsReadOnly="True" SortMemberPath="PROP_COMMENTS">
+                    <DataGridTemplateColumn Header="Comments"
+                                            Width="200"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PROP_COMMENTS">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding PROP_COMMENTS}"/>
+                                <TextBlock Text="{Binding PROP_COMMENTS}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Rectangle Fill="#FFECE9D8" Grid.ColumnSpan="3" Grid.Row="5" Height="3" HorizontalAlignment="Left" Margin="6,117,0,0" Name="rectangle1" Stroke="{x:Null}" VerticalAlignment="Top" Width="745" />
-            <Image Name="propertyCheckMark" IsHitTestVisible="False" Grid.Row="2" HorizontalAlignment="Right" Margin="0,77,323,17" Opacity="0" Source="check.png" Width="107" Grid.Column="1" />
+            <Rectangle Fill="#FFECE9D8"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="5"
+                       Height="3"
+                       HorizontalAlignment="Left"
+                       Margin="6,117,0,0"
+                       Name="rectangle1"
+                       Stroke="{x:Null}"
+                       VerticalAlignment="Top"
+                       Width="745" />
+            <Image Name="propertyCheckMark"
+                   IsHitTestVisible="False"
+                   Grid.Row="2"
+                   HorizontalAlignment="Right"
+                   Margin="0,77,323,17"
+                   Opacity="0"
+                   Source="check.png"
+                   Width="107"
+                   Grid.Column="1" />
             <!--End Property Listings code-->
 
         </Grid>

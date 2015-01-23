@@ -7,11 +7,7 @@ using System.Windows;
 
 namespace PropertyManagement
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
-        
     }
 }

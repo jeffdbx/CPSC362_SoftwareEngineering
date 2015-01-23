@@ -17,13 +17,10 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Animation;
 
+
 namespace PropertyManagement
 {
-    /// <summary>
-    /// Interaction logic for PropertyManagementHome.xaml
-    /// </summary>
-    /// 
-
+    // This class implements the logic that interacts with PropertyManagementHome.xaml
     public partial class HomePage : Page
     {
         string propertyID;
@@ -49,7 +46,6 @@ namespace PropertyManagement
             editPropertyGrid.IsEnabled = false;
             addButton.IsEnabled = false;
 
-
             try
             {
                 // Try to fill our property ImageBox with the "No Image Available" picture.
@@ -66,6 +62,7 @@ namespace PropertyManagement
             }
         }
 
+        //----------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------
         // These 2 functions are used to automatically disable/enable certain buttons if depending
         // on if there are errors on the form.  For example, this code disables the Update button
@@ -85,9 +82,7 @@ namespace PropertyManagement
                 .All(child => IsValid(child));
         }
         //----------------------------------------------------------------------------------------
-
-
-
+        //----------------------------------------------------------------------------------------
 
         // Delete a Property
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -106,7 +101,6 @@ namespace PropertyManagement
                         RentAwareDBDataSetTableAdapters.rw_unitTableAdapter unitAdapter = new RentAwareDBDataSetTableAdapters.rw_unitTableAdapter();
                         RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter tenantAdapter = new RentAwareDBDataSetTableAdapters.rw_tenantTableAdapter();
                         
-                        
                         // This creates an instance of one entire row of the currently selected property in the DataGrid.  Meaning, if
                         // "Bell Gardens Apartments" is selected, then all of it's row data is available here.
                         DataRowView row = (DataRowView)propertyDataGrid.SelectedItems[0];
@@ -121,10 +115,9 @@ namespace PropertyManagement
                         // Delete all of the tenants that were associated with the property we just deleted.
                         tenantAdapter.DeleteTenantByPropertyID((int)row["PROP_ID"]);
 
-                        
                         // Update our property DataGrid box on the main page, showing that the deleted property is indeed gone.
-                        // NOTE: This next line is throwing an exception and I don't know why.  However everything continues working
-                        //       fine, so I just disabled the error message that pops up.
+                        // NOTE: This next line is throwing a vague exception and I don't know why.  However everything continues working
+                        //       fine, so I just disabled the error message that pops up. Not the best solution, but it works for now.
                         propertyDataGrid.DataContext = propertyAdapter.GetProperties();
 
                         // Animate the success check mark
@@ -153,7 +146,6 @@ namespace PropertyManagement
             {
                 try
                 {
-
                     // Create an instance of an adapter to allow us to add properties to the database.
                     RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter myAdapter = new RentAwareDBDataSetTableAdapters.rw_propertyTableAdapter();
                         
@@ -182,7 +174,6 @@ namespace PropertyManagement
                         {
                             // This will throw an error if I try to pick the same image that is already set as the current 
                             // properties image.
-
                             System.Windows.MessageBox.Show(ex.Message);
                         }
                         userIsEditingTheImage = false;
@@ -432,7 +423,6 @@ namespace PropertyManagement
                                 {
                                     // This will throw an error if I try to pick the same image that is already set as the current 
                                     // properties image.
-
                                      System.Windows.MessageBox.Show("Attempting to Update image failed.\n\n" + ex.Message);
                                 }
                                 userIsEditingTheImage = false;
@@ -475,7 +465,8 @@ namespace PropertyManagement
             userIsEditingTheImage = false;
             onlyImageFileName = "";
 
-            // Try to load our picture box with the "No Image Availabe" .jpg. If that image isn't found, then just leave the ImageBox blank.
+            // Try to load our picture box with the "No Image Availabe" .jpg. If that image isn't found, 
+            // then just leave the ImageBox blank.
             try
             {
                 string baseDir = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -515,6 +506,4 @@ namespace PropertyManagement
             }
         }
     }
-
- 
 }

@@ -1,36 +1,49 @@
-﻿<Page x:Class="PropertyManagement.ManagePage"
+﻿<!-- This file controls the UI layout of the Manage page of the application -->
+
+<Page x:Class="PropertyManagement.ManagePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:src="clr-namespace:PropertyManagement"
-      mc:Ignorable="d" 
-      d:DesignHeight="684" d:DesignWidth="800"
-	Title="Manage Property">
-
+      mc:Ignorable="d"
+      d:DesignHeight="684"
+      d:DesignWidth="800"
+      Title="Manage Property">
 
     <Page.Resources>
-        <!--The Styling that controls the form text box validation.  This isn't being used just yet, but will be in the next update-->
-        <src:ValidateData x:Key="data"/>
+        <!--The Styling that controls the form text box validation. -->
+        <src:ValidateData x:Key="data" />
 
         <!--The tool tip for the TextBox to display the validation error message.
         <Style x:Key="textBoxInError" TargetType="TextBox">-->
         <Style  TargetType="{x:Type TextBox}">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,40,2" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="0,2,40,2" />
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>
                         <DockPanel LastChildFill="true">
-                            <Border Background="Red" DockPanel.Dock="right" Margin="5,0,0,0" 
-                                Width="20" Height="20" CornerRadius="5"
-                                ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
-                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" 
-                                   FontWeight="Bold" Foreground="white" />
+                            <Border Background="Red"
+                                    DockPanel.Dock="right"
+                                    Margin="5,0,0,0"
+                                    Width="20"
+                                    Height="20"
+                                    CornerRadius="5"
+                                    ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!"
+                                           VerticalAlignment="center"
+                                           HorizontalAlignment="center"
+                                           FontWeight="Bold"
+                                           Foreground="white" />
                             </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
-                                <Border BorderBrush="red" BorderThickness="1" />
+                            <AdornedElementPlaceholder Name="customAdorner"
+                                                       VerticalAlignment="Center">
+                                <Border BorderBrush="red"
+                                        BorderThickness="1" />
                             </AdornedElementPlaceholder>
                         </DockPanel>
                     </ControlTemplate>
@@ -38,39 +51,36 @@
             </Setter>
         </Style>
 
-
         <Style TargetType="{x:Type NavigationWindow}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type NavigationWindow}">
 
                         <AdornerDecorator>
-                            <ContentPresenter Name="PART_NavWinCP" 
-                              ClipToBounds="true"/>
+                            <ContentPresenter Name="PART_NavWinCP"
+                                              ClipToBounds="true" />
                         </AdornerDecorator>
 
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
         <!--End validation styling-->
     </Page.Resources>
-
 
     <!--This creates the grid layout-->
     <Grid Margin="10,0,10,10">
         <Grid Margin="0,0,0,-27">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="719" />
                 <ColumnDefinition Width="41" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="82"/>
-                <RowDefinition Height="176"/>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="82" />
+                <RowDefinition Height="176" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="203" />
                 <RowDefinition Height="114" />
@@ -78,79 +88,135 @@
             </Grid.RowDefinitions>
 
             <!-- "Property Management" header -->
-            <Label Style="{StaticResource headerTextStyle}" Margin="10,20,101,28" Grid.Column="1" Name="mainHeader" Height="34" Grid.Row="1" />
-            
-            <Image Source="gear.jpg" Grid.Column="1" HorizontalAlignment="Right" 
-                   Width="75" Opacity="1" Margin="0,7,32,28" Grid.RowSpan="2" Grid.ColumnSpan="2" />
-            <Border Grid.Row="1" Style="{StaticResource listHeaderStyle}" Margin="9,55,32,168" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Label Style="{StaticResource headerTextStyle}"
+                   Margin="10,20,101,28"
+                   Grid.Column="1"
+                   Name="mainHeader"
+                   Height="34"
+                   Grid.Row="1" />
+
+            <Image Source="gear.jpg"
+                   Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Width="75"
+                   Opacity="1"
+                   Margin="0,7,32,28"
+                   Grid.RowSpan="2"
+                   Grid.ColumnSpan="2" />
+
+            <!--This is the blue bar above the list box that says "Units Inventory"-->
+            <Border Grid.Row="1"
+                    Style="{StaticResource listHeaderStyle}"
+                    Margin="9,55,32,168"
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="2">
                 <Label Style="{StaticResource listHeaderTextStyle}">Units Inventory</Label>
             </Border>
-            <DataGrid Name="unitsDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="9,8,32,0" Grid.Column="1" Grid.Row="2" Height="135" VerticalAlignment="Top" CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserSortColumns="True" GridLinesVisibility="None" SelectionChanged="unitsDataGrid_SelectionChanged" Grid.ColumnSpan="2">
+
+            <!--This populates the unitsDataGrid with the data from our database-->
+            <DataGrid Name="unitsDataGrid"
+                      ItemsSource="{Binding}"
+                      AutoGenerateColumns="False"
+                      Margin="9,8,32,0"
+                      Grid.Column="1"
+                      Grid.Row="2"
+                      Height="135"
+                      VerticalAlignment="Top"
+                      CanUserReorderColumns="True"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      CanUserAddRows="False"
+                      CanUserSortColumns="True"
+                      GridLinesVisibility="None"
+                      SelectionChanged="unitsDataGrid_SelectionChanged"
+                      Grid.ColumnSpan="2">
                 <DataGrid.Columns>
-                    <!--<DataGridTemplateColumn Header="ID" Width="30" IsReadOnly="True" SortMemberPath="PROP_ID" >
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding PROP_ID}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                    <DataGridTemplateColumn Header="Unit" Width="50" IsReadOnly="True" SortMemberPath="UNIT_ID">
+
+                    <DataGridTemplateColumn Header="Unit"
+                                            Width="50"
+                                            IsReadOnly="True"
+                                            SortMemberPath="UNIT_ID">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding UNIT_ID}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Bath QTY" Width="65" IsReadOnly="True" SortMemberPath="BATH_QTY">
+                    <DataGridTemplateColumn Header="Bath QTY"
+                                            Width="65"
+                                            IsReadOnly="True"
+                                            SortMemberPath="BATH_QTY">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding BATH_QTY}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Bed QTY" Width="65" IsReadOnly="True" SortMemberPath="BEDR_QTY">
+                    <DataGridTemplateColumn Header="Bed QTY"
+                                            Width="65"
+                                            IsReadOnly="True"
+                                            SortMemberPath="BEDR_QTY">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding BEDR_QTY}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Floor #" Width="55" IsReadOnly="True" SortMemberPath="FLOOR_NO">
+                    <DataGridTemplateColumn Header="Floor #"
+                                            Width="55"
+                                            IsReadOnly="True"
+                                            SortMemberPath="FLOOR_NO">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FLOOR_NO}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Pets Allowed" Width="80" IsReadOnly="True" SortMemberPath="PETS_NO">
+                    <DataGridTemplateColumn Header="Pets Allowed"
+                                            Width="80"
+                                            IsReadOnly="True"
+                                            SortMemberPath="PETS_NO">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding PETS_NO}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Sq. Ft." Width="70" IsReadOnly="True" SortMemberPath="FLOOR_AREA_SF">
+                    <DataGridTemplateColumn Header="Sq. Ft."
+                                            Width="70"
+                                            IsReadOnly="True"
+                                            SortMemberPath="FLOOR_AREA_SF">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FLOOR_AREA_SF}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Monthly Rent" Width="85" IsReadOnly="True" SortMemberPath="MTHLY_RENT_AM">
+                    <DataGridTemplateColumn Header="Monthly Rent"
+                                            Width="85"
+                                            IsReadOnly="True"
+                                            SortMemberPath="MTHLY_RENT_AM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding MTHLY_RENT_AM, StringFormat={}{0:n2}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Deposit Amt" Width="85" IsReadOnly="True" SortMemberPath="INIT_DEPOSIT_AM">
+                    <DataGridTemplateColumn Header="Deposit Amt"
+                                            Width="85"
+                                            IsReadOnly="True"
+                                            SortMemberPath="INIT_DEPOSIT_AM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding INIT_DEPOSIT_AM, StringFormat={}{0:n2}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Notes" Width="180" IsReadOnly="True" SortMemberPath="UNIT_NOTES_TX">
+                    <DataGridTemplateColumn Header="Notes"
+                                            Width="180"
+                                            IsReadOnly="True"
+                                            SortMemberPath="UNIT_NOTES_TX">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding UNIT_NOTES_TX}" />
@@ -159,152 +225,306 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <!--This is the blue bar above the list box that says "Properties Inventory"-->
-            <!--This populates the propertyDataGrid with the data from our database-->
-            <!--End Property Listings code-->
 
+            <!-- Units Buttons -->
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="9,148,0,3"
+                    HorizontalAlignment="Left"
+                    Width="85"
+                    Click="backButton_Click">Back
+            </Button>
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="0,148,96,3"
+                    Width="85"
+                    Content="Delete Unit"
+                    Name="deleteUnitsButton"
+                    Click="deleteUnitsButton_Click">
+            </Button>
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="0,148,273,3"
+                    Width="85"
+                    Content="Edit Unit"
+                    Name="editUnitsButton"
+                    Click="editUnitButton_Click">
+            </Button>
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Style="{StaticResource buttonStyle}"
+                    Margin="0,148,33,3"
+                    Width="101"
+                    Content="New Unit"
+                    Name="newUnitButton"
+                    Click="addNewUnit_Button_Click"
+                    Grid.ColumnSpan="2"></Button>
 
-            <!-- Buttons -->
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource buttonStyle}" Margin="9,148,0,3" HorizontalAlignment="Left" Width="85" Click="backButton_Click">Back</Button>
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource buttonStyle}" Margin="0,148,96,3" Width="85" Content="Delete Unit" Name="deleteUnitsButton" Click="deleteUnitsButton_Click"></Button>
-            <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource buttonStyle}" Margin="0,148,273,3" Width="85" Content="Edit Unit" Name="editUnitsButton" Click="editUnitButton_Click"></Button>
-            <Button Style="{StaticResource buttonStyle}" Margin="0,148,33,3" Width="101" Content="New Unit" Grid.Column="1" Grid.Row="2" Name="newUnitButton" Click="addNewUnit_Button_Click" Grid.ColumnSpan="2"></Button>
-
-            <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="9,18,0,95" Name="editUnitsGrid" Width="719" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid Grid.Column="1"
+                  Grid.Row="3"
+                  HorizontalAlignment="Left"
+                  Margin="9,18,0,95"
+                  Name="editUnitsGrid"
+                  Width="719"
+                  Grid.RowSpan="2"
+                  Grid.ColumnSpan="2">
                 <Grid.CommandBindings>
-                    <CommandBinding Command="New" CanExecute="CanExecute"  />
+                    <CommandBinding Command="New"
+                                    CanExecute="CanExecute" />
                 </Grid.CommandBindings>
-                
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="103,2,0,0"  Name="unitNumBox"    VerticalAlignment="Top" Width="92" MaxLength="3" >
+
+                <!--All of our textboxes.  Many of them use "Binding.ValidationRules" to validate user input. -->
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="103,2,0,0"
+                         Name="unitNumBox"
+                         VerticalAlignment="Top"
+                         Width="92"
+                         MaxLength="3">
                     <TextBox.Text>
                         <!-- Setting the ValidatesOnDataErrors to true enables the Binding to check for
-                    errors raised by the IDataErrorInfo implementation.
-                    Alternatively, you can add DataErrorValidationRule to <Binding.ValidationRules/>-->
-                        <Binding NotifyOnValidationError="True" Path="UnitNumber" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        errors raised by the IDataErrorInfo implementation.
+                        Alternatively, you can add DataErrorValidationRule to <Binding.ValidationRules/> -->
+                        <Binding NotifyOnValidationError="True"
+                                 Path="UnitNumber"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <!-- Checks for exceptions during the setting of the source property.
-                            Alternatively, set ValidatesOnExceptions to True on the Binding.-->
-                                <ExceptionValidationRule/>
+                                Alternatively, set ValidatesOnExceptions to True on the Binding.-->
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="103,29,0,0" Name="floorNumBox"   VerticalAlignment="Top" Width="92" MaxLength="3" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="103,29,0,0"
+                         Name="floorNumBox"
+                         VerticalAlignment="Top"
+                         Width="92"
+                         MaxLength="3">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="FloorNumber" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="FloorNumber"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox HorizontalAlignment="Right" Margin="0,57,524,0"    Name="sqFtBox" Width="92" MaxLength="4" Height="23" VerticalAlignment="Top" >
+                <TextBox HorizontalAlignment="Right"
+                         Margin="0,57,524,0"
+                         Name="sqFtBox"
+                         Width="92"
+                         MaxLength="4"
+                         Height="23"
+                         VerticalAlignment="Top">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="SquareFt" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="SquareFt"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,86,0,0" Name="petsComboBox" VerticalAlignment="Top" Width="92" />
+                <ComboBox Height="23"
+                          HorizontalAlignment="Left"
+                          Margin="103,86,0,0"
+                          Name="petsComboBox"
+                          VerticalAlignment="Top"
+                          Width="92" />
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="335,2,0,0"  Name="bathQtyBox" VerticalAlignment="Top" Width="82" MaxLength="3" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="335,2,0,0"
+                         Name="bathQtyBox"
+                         VerticalAlignment="Top"
+                         Width="82"
+                         MaxLength="3">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="BathQuantity" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="BathQuantity"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="335,29,0,0"  Name="bedrQtyBox"    VerticalAlignment="Top" Width="82" MaxLength="3" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="335,29,0,0"
+                         Name="bedrQtyBox"
+                         VerticalAlignment="Top"
+                         Width="82"
+                         MaxLength="3">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="BedQuantity" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="BedQuantity"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox Height="25" HorizontalAlignment="Right"  Margin="0,57,0,0"  Name="notesBox"   VerticalAlignment="Top" Width="384" MaxLength="255" />
+                <TextBox Height="25"
+                         HorizontalAlignment="Right"
+                         Margin="0,57,0,0"
+                         Name="notesBox"
+                         VerticalAlignment="Top"
+                         Width="384"
+                         MaxLength="255" />
 
-                <TextBox Height="23" HorizontalAlignment="Right" Margin="0,2,0,0"   Name="mthlyRentBox" VerticalAlignment="Top" Width="151" MaxLength="10">
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,2,0,0"
+                         Name="mthlyRentBox"
+                         VerticalAlignment="Top"
+                         Width="151"
+                         MaxLength="10">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="MonthlyRent" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="MonthlyRent"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-
-                <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,29,0,0"  Name="depositBox"   VerticalAlignment="Top" Width="151" MaxLength="10" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,29,0,0"
+                         Name="depositBox"
+                         VerticalAlignment="Top"
+                         Width="151"
+                         MaxLength="10">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="Deposit" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Deposit"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-
 
                 <!--All of our labels-->
-                <Label Content="Unit Number*"      Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <Label Content="Bath Quantity*"    Height="28" HorizontalAlignment="Left" Margin="225,0,0,0"  VerticalAlignment="Top" />
-                <Label Content="Bedroom Quantity*" Height="28" HorizontalAlignment="Left" Margin="225,27,0,0"  VerticalAlignment="Top" />
-                <Label Content="Floor Number*"     Height="28" HorizontalAlignment="Left" Margin="0,27,0,0"   VerticalAlignment="Top" />
-                <Label Content="# of Pets Allowed"    Height="28" HorizontalAlignment="Left" Margin="1,81,0,0"  VerticalAlignment="Top" />
-                <Label Content="Square Feet*"      Height="28" HorizontalAlignment="Left" Margin="0,55,0,0"   VerticalAlignment="Top" />
-                <Label Content="Monthly Rent" HorizontalAlignment="Left" Margin="456,0,0,92" />
-                <Label Content="Deposit Amount"   Height="28" HorizontalAlignment="Left" Margin="456,27,0,0" VerticalAlignment="Top" />
-                <Label Content="Notes"            Height="28" HorizontalAlignment="Left" Margin="225,52,0,0"  VerticalAlignment="Top" />
+                <Label Content="Unit Number*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top" />
+                <Label Content="Bath Quantity*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="225,0,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="Bedroom Quantity*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="225,27,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="Floor Number*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="0,27,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="# of Pets Allowed"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="1,81,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="Square Feet*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="0,55,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="Monthly Rent"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="456,0,0,92"
+                       VerticalAlignment="Top" />
+                <Label Content="Deposit Amount"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="456,27,0,0"
+                       VerticalAlignment="Top" />
+                <Label Content="Notes"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="225,52,0,0"
+                       VerticalAlignment="Top" />
 
-                
                 <!--The buttons in our editPropertyGrid-->
-                <Button Style="{StaticResource buttonStyle}" Margin="455,89,0,0" Width="85"  Content="Clear Form" HorizontalAlignment="Left" Click="clearUnitForm_Click" Height="25" VerticalAlignment="Top"></Button>
-                <Button Style="{StaticResource buttonStyle}" Margin="0,89,89,0" Width="85" Content="Update Unit"  Name="updateUnitButton" Height="25" VerticalAlignment="Top" Click="updateUnitButton_Click" Command="New"></Button>
-                <Button Style="{StaticResource buttonStyle}" Margin="0,89,0,0" Width="85"  Content="Add Unit" Name="addUnitButton" Height="25" VerticalAlignment="Top" Click="addUnitButton_Click" Command="New"></Button>
-               
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="455,89,0,0"
+                        Width="85"
+                        Content="Clear Form"
+                        HorizontalAlignment="Left"
+                        Click="clearUnitForm_Click"
+                        Height="25"
+                        VerticalAlignment="Top"></Button>
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="0,89,89,0"
+                        Width="85"
+                        Content="Update Unit"
+                        Name="updateUnitButton"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Click="updateUnitButton_Click"
+                        Command="New"></Button>
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="0,89,0,0"
+                        Width="85"
+                        Content="Add Unit"
+                        Name="addUnitButton"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Click="addUnitButton_Click"
+                        Command="New"></Button>
             </Grid>
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <Grid Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="11,114,0,43" Name="editTenantGrid" Width="719" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <!--The editTenantGrid grid -->
+            <Grid Grid.Column="1"
+                  Grid.Row="4"
+                  HorizontalAlignment="Left"
+                  Margin="11,114,0,43"
+                  Name="editTenantGrid"
+                  Width="719"
+                  Grid.RowSpan="3"
+                  Grid.ColumnSpan="2">
                 <Grid.CommandBindings>
-                    <CommandBinding Command="New" CanExecute="CanExecute"  />
+                    <CommandBinding Command="New"
+                                    CanExecute="CanExecute" />
                 </Grid.CommandBindings>
-
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*" />
@@ -314,13 +534,29 @@
                     <ColumnDefinition Width="8*" />
                     <ColumnDefinition Width="711*" />
                 </Grid.ColumnDefinitions>
-                <!--This is the blue bar above the list box that says "Properties Inventory"-->
-                <!--This populates the propertyDataGrid with the data from our database-->
-                <DataGrid Name="tenantDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Margin="-2,36,2,0" Height="76" VerticalAlignment="Top" CanUserReorderColumns="True" 
-                      CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserSortColumns="True" GridLinesVisibility="None"  Grid.Row="1" Grid.ColumnSpan="2" SelectionChanged="tenantDataGrid_SelectionChanged">
+
+                <!--This populates the tenantsDataGrid with the data from our database-->
+                <DataGrid Name="tenantDataGrid"
+                          ItemsSource="{Binding}"
+                          AutoGenerateColumns="False"
+                          Margin="-2,36,2,0"
+                          Height="76"
+                          VerticalAlignment="Top"
+                          CanUserReorderColumns="True"
+                          CanUserResizeColumns="True"
+                          CanUserResizeRows="False"
+                          CanUserAddRows="False"
+                          CanUserSortColumns="True"
+                          GridLinesVisibility="None"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="2"
+                          SelectionChanged="tenantDataGrid_SelectionChanged">
                     <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="First Name" Width="100" IsReadOnly="True" SortMemberPath="TENANT_F_NM" >
+                        <DataGridTemplateColumn Header="First Name"
+                                                Width="100"
+                                                IsReadOnly="True"
+                                                SortMemberPath="TENANT_F_NM">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding TENANT_F_NM}" />
@@ -328,15 +564,21 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Last Name" Width="100" IsReadOnly="True" SortMemberPath="TENANT_L_NM">
+                        <DataGridTemplateColumn Header="Last Name"
+                                                Width="100"
+                                                IsReadOnly="True"
+                                                SortMemberPath="TENANT_L_NM">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding TENANT_L_NM}"/>
+                                    <TextBlock Text="{Binding TENANT_L_NM}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Phone" Width="120" IsReadOnly="True" SortMemberPath="Tenant_PH" >
+                        <DataGridTemplateColumn Header="Phone"
+                                                Width="120"
+                                                IsReadOnly="True"
+                                                SortMemberPath="Tenant_PH">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Tenant_PH}" />
@@ -344,7 +586,10 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Employer" Width="165" IsReadOnly="True" SortMemberPath="Employer_NM" >
+                        <DataGridTemplateColumn Header="Employer"
+                                                Width="165"
+                                                IsReadOnly="True"
+                                                SortMemberPath="Employer_NM">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Employer_NM}" />
@@ -352,135 +597,349 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Rental Start Date" Width="110" IsReadOnly="True" SortMemberPath="RENTAL_START_DT">
+                        <DataGridTemplateColumn Header="Rental Start Date"
+                                                Width="110"
+                                                IsReadOnly="True"
+                                                SortMemberPath="RENTAL_START_DT">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding RENTAL_START_DT, StringFormat={}{0:MM/dd/yyyy}}"/>
+                                    <TextBlock Text="{Binding RENTAL_START_DT, StringFormat={}{0:MM/dd/yyyy}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Amount Due" Width="85" IsReadOnly="True" SortMemberPath="DUE_AM">
+                        <DataGridTemplateColumn Header="Amount Due"
+                                                Width="85"
+                                                IsReadOnly="True"
+                                                SortMemberPath="DUE_AM">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding DUE_AM, StringFormat={}{0:n2}}"/>
+                                    <TextBlock Text="{Binding DUE_AM, StringFormat={}{0:n2}}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
                 </DataGrid>
-                <!--End Property Listings code-->
 
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="63,132,0,0"  Name="firstNmBox"    VerticalAlignment="Top" Width="95" Grid.Column="1" Grid.Row="1" MaxLength="25" >
+                <!--All of our tenantsDataGrid textboxes.  Many of them use "Binding.ValidationRules" to validate user input. -->
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="63,132,0,0"
+                         Name="firstNmBox"
+                         VerticalAlignment="Top"
+                         Width="95"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="25">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="FirstName" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="FirstName"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="63,162,0,0" Name="lastNmBox"   VerticalAlignment="Top" Width="95" Grid.Column="1" Grid.Row="1" MaxLength="25" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="63,162,0,0"
+                         Name="lastNmBox"
+                         VerticalAlignment="Top"
+                         Width="95"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="25">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="LastName" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="LastName"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="63,190,0,0"  Name="tenantPhBox" VerticalAlignment="Top" Width="95" Grid.Column="1" Grid.Row="1" MaxLength="255" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="63,190,0,0"
+                         Name="tenantPhBox"
+                         VerticalAlignment="Top"
+                         Width="95"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="255">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="Phone" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="Phone"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
 
-                <DatePicker 
-                    Name="dobPicker"
-                    Height="26"
-                    VerticalAlignment="Top"
-                    Margin="263,131,0,0"
-                    DisplayDateStart="1/1/1900"
-                    DisplayDateEnd="12/31/2025"
-                    SelectedDate="{x:Static sys:DateTime.Now}" 
-                    FirstDayOfWeek="Sunday"
-                    IsTodayHighlighted="True" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="90" />
+                <DatePicker Name="dobPicker"
+                            Height="26"
+                            VerticalAlignment="Top"
+                            Margin="263,131,0,0"
+                            DisplayDateStart="1/1/1900"
+                            DisplayDateEnd="12/31/2025"
+                            SelectedDate="{x:Static sys:DateTime.Now}"
+                            FirstDayOfWeek="Sunday"
+                            IsTodayHighlighted="True"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            Width="90" />
 
-
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="263,161,0,0"  Name="amountDue"    VerticalAlignment="Top" Width="90" Grid.Column="1" Grid.Row="1" MaxLength="10" >
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="263,161,0,0"
+                         Name="amountDue"
+                         VerticalAlignment="Top"
+                         Width="90"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="10">
                     <TextBox.Text>
-                        <Binding NotifyOnValidationError="True" Path="AmountDue" Source="{StaticResource data}"
-                         ValidatesOnDataErrors="True"   
-                         UpdateSourceTrigger="PropertyChanged">
+                        <Binding NotifyOnValidationError="True"
+                                 Path="AmountDue"
+                                 Source="{StaticResource data}"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <ExceptionValidationRule/>
+                                <ExceptionValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                
-                
-                
-                
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="263,189,0,0" Name="depositComboBox" VerticalAlignment="Top" Width="90" Grid.Column="1" Grid.Row="1">
+
+                <ComboBox Height="23"
+                          HorizontalAlignment="Left"
+                          Margin="263,189,0,0"
+                          Name="depositComboBox"
+                          VerticalAlignment="Top"
+                          Width="90"
+                          Grid.Column="1"
+                          Grid.Row="1">
                     <ComboBoxItem Content="Yes"></ComboBoxItem>
                     <ComboBoxItem Content="No"></ComboBoxItem>
                 </ComboBox>
 
-                <TextBox Height="23" HorizontalAlignment="Left" Margin="481,130,0,0"   Name="empNmBox"        VerticalAlignment="Top" Width="103" Grid.Column="1" Grid.Row="1" MaxLength="50" />
-                <TextBox Height="23" HorizontalAlignment="Right"  Margin="0,157,127,0"  Name="empPhBox"   VerticalAlignment="Top" Width="103" Grid.Column="1" Grid.Row="1" MaxLength="20" />
+                <TextBox Height="23"
+                         HorizontalAlignment="Left"
+                         Margin="481,130,0,0"
+                         Name="empNmBox"
+                         VerticalAlignment="Top"
+                         Width="103"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="50" />
+                <TextBox Height="23"
+                         HorizontalAlignment="Right"
+                         Margin="0,157,127,0"
+                         Name="empPhBox"
+                         VerticalAlignment="Top"
+                         Width="103"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MaxLength="20" />
 
-                <DatePicker 
-                    Name="rentalPicker"
-                    Height="26"
-                    VerticalAlignment="Top"
-                    Margin="0,154,2,0"
-                    DisplayDateStart="1/1/2000"
-                    DisplayDateEnd="12/31/2025"
-                    SelectedDate="{x:Static sys:DateTime.Now}" 
-                    FirstDayOfWeek="Sunday"
-                    IsTodayHighlighted="True" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="115" />
+                <DatePicker Name="rentalPicker"
+                            Height="26"
+                            VerticalAlignment="Top"
+                            Margin="0,154,2,0"
+                            DisplayDateStart="1/1/2000"
+                            DisplayDateEnd="12/31/2025"
+                            SelectedDate="{x:Static sys:DateTime.Now}"
+                            FirstDayOfWeek="Sunday"
+                            IsTodayHighlighted="True"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalAlignment="Right"
+                            Width="115" />
 
                 <!--All of our labels-->
-                <Label Content="First Name*"      Height="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-2,129,0,0" Grid.ColumnSpan="2" Grid.Row="1" />
-                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="-2,159,0,0" Grid.Row="1" Grid.ColumnSpan="2" Height="28" VerticalAlignment="Top" />
-                <Label Content="Phone*" Height="28" HorizontalAlignment="Left" Margin="-2,187,0,0"  VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" />
-                <Label Content="DOB" HorizontalAlignment="Left" Margin="186,129,0,0" Grid.Row="1" Grid.Column="1" Height="28" VerticalAlignment="Top" />
-                <Label Content="Amount Due"     Height="28" HorizontalAlignment="Left" Margin="186,158,0,0"   VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" />
-                <Label Content="Deposit"     Height="28" HorizontalAlignment="Left" Margin="186,187,0,0"   VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" />
-                <Label Content="Employer" HorizontalAlignment="Left" Margin="380,130,0,0" Grid.Column="1" Grid.Row="1" Height="28" VerticalAlignment="Top" />
-                <Label Content="Employer Phone"   Height="28" HorizontalAlignment="Left" Margin="380,157,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" />
-                <Label Content="Rental Start Date"   Height="28" HorizontalAlignment="Left" Margin="592,129,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" />
-                
+                <Label Content="First Name*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="-2,129,0,0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2" />
+                <Label Content="Last Name*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="-2,159,0,0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2" />
+                <Label Content="Phone*"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="-2,187,0,0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2" />
+                <Label Content="DOB"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="186,129,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Content="Amount Due"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="186,158,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Content="Deposit"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="186,187,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Content="Employer"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="380,130,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Content="Employer Phone"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="380,157,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Label Content="Rental Start Date"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="592,129,0,0"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+
                 <!--The buttons in our editPropertyGrid-->
-                <Button Style="{StaticResource buttonStyle}" Margin="358,190,0,0" Width="85"  Content="Clear Form" HorizontalAlignment="Left" Click="clearTenantFormButton_Click" Height="25" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1"></Button>
-                <Button Style="{StaticResource buttonStyle}" Margin="447,189,0,0" Width="85" Content="Update Tenant"  Name="updateTenantButton" Height="25" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Click="updateTenantButton_Click" Command="New"></Button>
-                <Button Style="{StaticResource buttonStyle}" Margin="0,189,92,0" Width="85"  Content="Delete Tenant" Name="deleteTenantButton" Height="25" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Click="deleteTenantButton_Click"></Button>
-                <Button Style="{StaticResource buttonStyle}" Margin="0,189,3,0" Width="85"  Content="Add Tenant" Name="addTenantButton" Height="25" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Click="addTenantButton_Click" Command="New"></Button>
-                
-                <Border Style="{StaticResource listHeaderStyle}" Margin="-2,4,2,0" Height="35" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2">
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="358,190,0,0"
+                        Width="85"
+                        Content="Clear Form"
+                        HorizontalAlignment="Left"
+                        Click="clearTenantFormButton_Click"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Grid.Row="1"></Button>
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="447,189,0,0"
+                        Width="85"
+                        Content="Update Tenant"
+                        Name="updateTenantButton"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        Click="updateTenantButton_Click"
+                        Command="New"></Button>
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="0,189,92,0"
+                        Width="85"
+                        Content="Delete Tenant"
+                        Name="deleteTenantButton"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Click="deleteTenantButton_Click"></Button>
+                <Button Style="{StaticResource buttonStyle}"
+                        Margin="0,189,3,0"
+                        Width="85"
+                        Content="Add Tenant"
+                        Name="addTenantButton"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Click="addTenantButton_Click"
+                        Command="New"></Button>
+
+                <!--This is the blue bar above the list box that says "Current Tenant"-->
+                <Border Style="{StaticResource listHeaderStyle}"
+                        Margin="-2,4,2,0"
+                        Height="35"
+                        VerticalAlignment="Top"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2">
                     <Label Style="{StaticResource listHeaderTextStyle}">Current Tenant</Label>
                 </Border>
-                <Image Name="tenantCheckMark" IsHitTestVisible="False" Grid.Row="1" HorizontalAlignment="Right" Margin="0,50,312,111" Opacity="0" Source="check.png" Width="107" Grid.Column="1" />
+                <Image Name="tenantCheckMark"
+                       IsHitTestVisible="False"
+                       Grid.Row="1"
+                       HorizontalAlignment="Right"
+                       Margin="0,50,312,111"
+                       Opacity="0"
+                       Source="check.png"
+                       Width="107"
+                       Grid.Column="1" />
             </Grid>
-            <Button Style="{StaticResource buttonStyle}" Margin="0,148,184,0" Width="85" Content="Edit Tenant" Name="editTenantButton" HorizontalAlignment="Right" Click="editTenantButton_Click" Height="25" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2"></Button>
-            <Rectangle Grid.Row="4" Height="3" HorizontalAlignment="Left" Margin="15,112,0,0" Name="rectangle1" Stroke="{x:Null}" VerticalAlignment="Top" Width="745" Grid.ColumnSpan="3" Fill="#FFECE9D8" />
-            <Rectangle Fill="#FFECE9D8" Height="3" HorizontalAlignment="Left" Margin="15,31,0,0" Name="rectangle2" Stroke="{x:Null}" VerticalAlignment="Top" Width="745" Grid.ColumnSpan="3" Grid.Row="6" />
-            <Image Name="checkMark" IsHitTestVisible="False" Source="check.png" Grid.Column="1" HorizontalAlignment="Right" Width="107" Opacity="0" Margin="0,35,312,60" Grid.Row="2" />
+
+            <Button Style="{StaticResource buttonStyle}"
+                    Margin="0,148,184,0"
+                    Width="85"
+                    Content="Edit Tenant"
+                    Name="editTenantButton"
+                    HorizontalAlignment="Right"
+                    Click="editTenantButton_Click"
+                    Height="25"
+                    VerticalAlignment="Top"
+                    Grid.Column="1"
+                    Grid.Row="2"></Button>
+            <Rectangle Grid.Row="4"
+                       Height="3"
+                       HorizontalAlignment="Left"
+                       Margin="15,112,0,0"
+                       Name="rectangle1"
+                       Stroke="{x:Null}"
+                       VerticalAlignment="Top"
+                       Width="745"
+                       Grid.ColumnSpan="3"
+                       Fill="#FFECE9D8" />
+            <Rectangle Fill="#FFECE9D8"
+                       Height="3"
+                       HorizontalAlignment="Left"
+                       Margin="15,31,0,0"
+                       Name="rectangle2"
+                       Stroke="{x:Null}"
+                       VerticalAlignment="Top"
+                       Width="745"
+                       Grid.ColumnSpan="3"
+                       Grid.Row="6" />
+            <Image Name="checkMark"
+                   IsHitTestVisible="False"
+                   Source="check.png"
+                   Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Width="107"
+                   Opacity="0"
+                   Margin="0,35,312,60"
+                   Grid.Row="2" />
         </Grid>
     </Grid>
 </Page>
