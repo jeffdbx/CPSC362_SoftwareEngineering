@@ -45,7 +45,7 @@ namespace PropertyManagement
 
             unitsDataGrid.DataContext = myAdapter.GetUnitsByID(Convert.ToInt32(propertyID));
 
-            editUnitsGrid.IsEnabled = false;
+            editUnitsGrid.IsEnabled  = false;
             editTenantGrid.IsEnabled = false;
 
             petsComboBox.Items.Add(0);
@@ -69,8 +69,7 @@ namespace PropertyManagement
         {
             // The dependency object is valid if it has no errors, 
             // and all of its children (that are dependency objects) are error-free.
-            return !Validation.GetHasError(obj) &&
-                LogicalTreeHelper.GetChildren(obj)
+            return !Validation.GetHasError(obj) && LogicalTreeHelper.GetChildren(obj)
                 .OfType<DependencyObject>()
                 .All(child => IsValid(child));
         }
@@ -84,20 +83,20 @@ namespace PropertyManagement
 
         private void enableAllButtons()
         {
-            editUnitsButton.IsEnabled = true;
-            deleteUnitsButton.IsEnabled = true;
-            newUnitButton.IsEnabled = true;
-            editTenantButton.IsEnabled = true;
-            updateUnitButton.IsEnabled = true;
-            addUnitButton.IsEnabled = true;
+            editUnitsButton.IsEnabled    = true;
+            deleteUnitsButton.IsEnabled  = true;
+            newUnitButton.IsEnabled      = true;
+            editTenantButton.IsEnabled   = true;
+            updateUnitButton.IsEnabled   = true;
+            addUnitButton.IsEnabled      = true;
             updateTenantButton.IsEnabled = true;
             deleteTenantButton.IsEnabled = true;
-            addTenantButton.IsEnabled = true;
+            addTenantButton.IsEnabled    = true;
         }
 
         private void unitsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            editUnitsGrid.IsEnabled = false;
+            editUnitsGrid.IsEnabled  = false;
             editTenantGrid.IsEnabled = false;
             PopulateFormData();
             enableAllButtons();
@@ -197,7 +196,6 @@ namespace PropertyManagement
                     DataRowView row = (DataRowView)tenantDataGrid.SelectedItems[0];
 
                     // Make sure that the database value exists for each item before trying to populate the form.
-
                     if (row["TENANT_F_NM"] != DBNull.Value)
                         firstNmBox.Text = (string)row["TENANT_F_NM"];
                     else
@@ -255,28 +253,28 @@ namespace PropertyManagement
 
         private void ClearForms()
         {
-            unitNumBox.Text = "";
-            bathQtyBox.Text = "";
-            bedrQtyBox.Text = "";
-            floorNumBox.Text = "";
+            unitNumBox.Text   = "";
+            bathQtyBox.Text   = "";
+            bedrQtyBox.Text   = "";
+            floorNumBox.Text  = "";
             petsComboBox.Text = "";
-            sqFtBox.Text = "";
+            sqFtBox.Text      = "";
             mthlyRentBox.Text = "0.00";
-            depositBox.Text = "0.00";
-            notesBox.Text = "";
+            depositBox.Text   = "0.00";
+            notesBox.Text     = "";
         }
 
         private void ClearTenantForms()
         {
-            firstNmBox.Text = "";
-            tenantPhBox.Text = "";
-            amountDue.Text = "0.00";
-            depositComboBox.Text = "";
-            lastNmBox.Text = "";
-            empNmBox.Text = "";
-            empPhBox.Text = "";
+            firstNmBox.Text           = "";
+            tenantPhBox.Text          = "";
+            amountDue.Text            = "0.00";
+            depositComboBox.Text      = "";
+            lastNmBox.Text            = "";
+            empNmBox.Text             = "";
+            empPhBox.Text             = "";
             rentalPicker.SelectedDate = null;
-            dobPicker.SelectedDate = null;
+            dobPicker.SelectedDate    = null;
         }
 
         private void clearUnitForm_Click(object sender, RoutedEventArgs e)
@@ -290,10 +288,10 @@ namespace PropertyManagement
                 System.Windows.MessageBox.Show("Please select a unit to edit.");
             else
             {
-                editUnitsGrid.IsEnabled = true;
-                addUnitButton.IsEnabled = false;
+                editUnitsGrid.IsEnabled    = true;
+                addUnitButton.IsEnabled    = false;
                 updateUnitButton.IsEnabled = true;
-                addUnitButton.IsEnabled = false;
+                addUnitButton.IsEnabled    = false;
             }
         }
 
@@ -321,10 +319,10 @@ namespace PropertyManagement
             editTenantGrid.IsEnabled = false;
 
             // Enable or disable the apropriate UI items.
-            editUnitsGrid.IsEnabled = true;
-            addUnitButton.IsEnabled = true;
-            updateUnitButton.IsEnabled = false;
-            editUnitsButton.IsEnabled = false;
+            editUnitsGrid.IsEnabled     = true;
+            addUnitButton.IsEnabled     = true;
+            updateUnitButton.IsEnabled  = false;
+            editUnitsButton.IsEnabled   = false;
             deleteUnitsButton.IsEnabled = false;
 
             // Clear the tenantDataGrid because we are adding a brand new unit.
@@ -388,18 +386,18 @@ namespace PropertyManagement
                         unitsDataGrid.DataContext = myAdapter.GetUnitsByID(Convert.ToInt32(propertyID));
 
                         // When the user has finished adding a new unit, reset the form like it was at the start.
-                        addUnitButton.IsEnabled = false;
-                        editUnitsButton.IsEnabled = true;
+                        addUnitButton.IsEnabled     = false;
+                        editUnitsButton.IsEnabled   = true;
                         deleteUnitsButton.IsEnabled = true;
-                        editUnitsGrid.IsEnabled = false;
-                        editTenantGrid.IsEnabled = false;
+                        editUnitsGrid.IsEnabled     = false;
+                        editTenantGrid.IsEnabled    = false;
 
                         // This animates the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
-                        imageAnimation.From = 0;
-                        imageAnimation.To = 1;
-                        imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        imageAnimation.AutoReverse = true;
+                        imageAnimation.From            = 0;
+                        imageAnimation.To              = 1;
+                        imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                        imageAnimation.AutoReverse     = true;
                         checkMark.BeginAnimation(OpacityProperty, imageAnimation);
                     }
                     catch (System.Exception ex)
@@ -451,10 +449,10 @@ namespace PropertyManagement
 
                         // This animates the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
-                        imageAnimation.From = 0;
-                        imageAnimation.To = 1;
-                        imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        imageAnimation.AutoReverse = true;
+                        imageAnimation.From            = 0;
+                        imageAnimation.To              = 1;
+                        imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                        imageAnimation.AutoReverse     = true;
                         checkMark.BeginAnimation(OpacityProperty, imageAnimation);
 
                     }
@@ -533,10 +531,10 @@ namespace PropertyManagement
 
                             // This animates the success check mark
                             DoubleAnimation imageAnimation = new DoubleAnimation();
-                            imageAnimation.From = 0;
-                            imageAnimation.To = 1;
-                            imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                            imageAnimation.AutoReverse = true;
+                            imageAnimation.From            = 0;
+                            imageAnimation.To              = 1;
+                            imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                            imageAnimation.AutoReverse     = true;
                             checkMark.BeginAnimation(OpacityProperty, imageAnimation);
 
                         }
@@ -599,12 +597,11 @@ namespace PropertyManagement
 
                         // Animate the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
-                        imageAnimation.From = 0;
-                        imageAnimation.To = 1;
-                        imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        imageAnimation.AutoReverse = true;
+                        imageAnimation.From            = 0;
+                        imageAnimation.To              = 1;
+                        imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                        imageAnimation.AutoReverse     = true;
                         tenantCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
-
                     }
                     catch (System.Exception ex)
                     {
@@ -645,16 +642,16 @@ namespace PropertyManagement
                         tenantDataGrid.DataContext = myAdapter.GetTenantByUnitNum(Convert.ToInt32(propertyID), unitNum);
 
                         ClearTenantForms();
-                        editTenantGrid.IsEnabled = false;
+                        editTenantGrid.IsEnabled     = false;
                         updateTenantButton.IsEnabled = false;
                         deleteTenantButton.IsEnabled = false;
 
                         // Animate the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
-                        imageAnimation.From = 0;
-                        imageAnimation.To = 1;
-                        imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        imageAnimation.AutoReverse = true;
+                        imageAnimation.From            = 0;
+                        imageAnimation.To              = 1;
+                        imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                        imageAnimation.AutoReverse     = true;
                         tenantCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
                     }
                     catch (System.Exception ex)
@@ -711,16 +708,16 @@ namespace PropertyManagement
                             // Update our tenant DataGrid box on the main page.
                             tenantDataGrid.DataContext = myAdapter.GetTenantByUnitNum(Convert.ToInt32(propertyID), unitNum);
 
-                            editTenantGrid.IsEnabled = false;
+                            editTenantGrid.IsEnabled     = false;
                             updateTenantButton.IsEnabled = false;
                             deleteTenantButton.IsEnabled = false;
 
                             // Animate the success check mark
                             DoubleAnimation imageAnimation = new DoubleAnimation();
-                            imageAnimation.From = 0;
-                            imageAnimation.To = 1;
-                            imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                            imageAnimation.AutoReverse = true;
+                            imageAnimation.From            = 0;
+                            imageAnimation.To              = 1;
+                            imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                            imageAnimation.AutoReverse     = true;
                             tenantCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
                         }
                         catch (System.Exception ex)

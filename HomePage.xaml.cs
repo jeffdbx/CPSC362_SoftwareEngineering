@@ -25,7 +25,7 @@ namespace PropertyManagement
     {
         string propertyID;
         string propertyName;
-        bool userIsEditingTheImage = false;
+        bool   userIsEditingTheImage = false;
         string onlyImageFileName = "";
         string sourcePath = "";
         string targetPath = "";
@@ -46,7 +46,7 @@ namespace PropertyManagement
 
             //Disable the edit form until the user explicitly clicks the "Edit" button.
             editPropertyGrid.IsEnabled = false;
-            addButton.IsEnabled = false;
+            addButton.IsEnabled        = false;
 
             try
             {
@@ -78,8 +78,7 @@ namespace PropertyManagement
         {
             // The dependency object is valid if it has no errors, 
             // and all of its children (that are dependency objects) are error-free.
-            return !Validation.GetHasError(obj) &&
-                LogicalTreeHelper.GetChildren(obj)
+            return !Validation.GetHasError(obj) && LogicalTreeHelper.GetChildren(obj)
                 .OfType<DependencyObject>()
                 .All(child => IsValid(child));
         }
@@ -132,10 +131,10 @@ namespace PropertyManagement
 
                         // Animate the success check mark
                         DoubleAnimation imageAnimation = new DoubleAnimation();
-                        imageAnimation.From = 0;
-                        imageAnimation.To = 1;
-                        imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        imageAnimation.AutoReverse = true;
+                        imageAnimation.From            = 0;
+                        imageAnimation.To              = 1;
+                        imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                        imageAnimation.AutoReverse     = true;
                         propertyCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
                     }
                     catch (System.Exception ex)
@@ -195,15 +194,15 @@ namespace PropertyManagement
                     propertyDataGrid.DataContext = myAdapter.GetProperties();
 
                     // When the user has finished adding a new property, reset the form like it was at the start of the program.
-                    addButton.IsEnabled = false;
+                    addButton.IsEnabled        = false;
                     editPropertyGrid.IsEnabled = false;
 
                     // Animate the success check mark
                     DoubleAnimation imageAnimation = new DoubleAnimation();
-                    imageAnimation.From = 0;
-                    imageAnimation.To = 1;
-                    imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                    imageAnimation.AutoReverse = true;
+                    imageAnimation.From            = 0;
+                    imageAnimation.To              = 1;
+                    imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                    imageAnimation.AutoReverse     = true;
                     propertyCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
 
                 }
@@ -222,7 +221,7 @@ namespace PropertyManagement
             // Each time the user selects a different property, disable the edit portion of the program until
             // the user explicitly presses the "Edit" button.
             editPropertyGrid.IsEnabled = false;
-            addButton.IsEnabled = false;
+            addButton.IsEnabled        = false;
 
             // Bounds checking! Leave this if statement here or bad things will happen!
             if (propertyDataGrid.SelectedIndex > (-1) && propertyDataGrid.SelectedIndex < propertyDataGrid.Items.Count)
@@ -356,8 +355,8 @@ namespace PropertyManagement
             {
                 // Make the editPropertyGrid that's been grayed out this whole time now accessible to the user.
                 editPropertyGrid.IsEnabled = true;
-                updateButton.IsEnabled = true;
-                addButton.IsEnabled = false;
+                updateButton.IsEnabled     = true;
+                addButton.IsEnabled        = false;
             }
         }
 
@@ -368,16 +367,16 @@ namespace PropertyManagement
 
         private void ClearForms()
         {
-            nameBox.Text = "";
-            addressBox.Text = "";
-            cityBox.Text = "";
-            zipBox.Text = "";
-            stateBox.Text = "";
+            nameBox.Text       = "";
+            addressBox.Text    = "";
+            cityBox.Text       = "";
+            zipBox.Text        = "";
+            stateBox.Text      = "";
             totalUnitsBox.Text = "";
-            mgrBox.Text = "";
-            mgrPhoneBox.Text = "";
-            mgrUnitBox.Text = "";
-            commentsBox.Text = "";
+            mgrBox.Text        = "";
+            mgrPhoneBox.Text   = "";
+            mgrUnitBox.Text    = "";
+            commentsBox.Text   = "";
         }
 
         // Manage a property.
@@ -396,7 +395,6 @@ namespace PropertyManagement
         // Update a property.
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-
             // This code is all very similar to the Add Property / Delete Property code.
             if (propertyDataGrid.SelectedIndex == -1)
                 System.Windows.MessageBox.Show("Make sure you have a property selected from the list before attempting to edit.");
@@ -448,10 +446,10 @@ namespace PropertyManagement
 
                             // Animate the success check mark
                             DoubleAnimation imageAnimation = new DoubleAnimation();
-                            imageAnimation.From = 0;
-                            imageAnimation.To = 1;
-                            imageAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-                            imageAnimation.AutoReverse = true;
+                            imageAnimation.From            = 0;
+                            imageAnimation.To              = 1;
+                            imageAnimation.Duration        = new Duration(TimeSpan.FromSeconds(1));
+                            imageAnimation.AutoReverse     = true;
                             propertyCheckMark.BeginAnimation(OpacityProperty, imageAnimation);
                         }
                         catch (System.Exception ex)
@@ -474,10 +472,10 @@ namespace PropertyManagement
             ClearForms();
             editPropertyGrid.IsEnabled = true;
 
-            addButton.IsEnabled = true;
+            addButton.IsEnabled    = true;
             updateButton.IsEnabled = false;
-            userIsEditingTheImage = false;
-            onlyImageFileName = "";
+            userIsEditingTheImage  = false;
+            onlyImageFileName      = "";
 
             // Try to load our picture box with the "No Image Availabe" .jpg. If that image isn't found, 
             // then just leave the ImageBox blank.
