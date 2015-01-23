@@ -3,4 +3,4 @@ of apartment information (tenants, rent, etc.).
 
 ![Alt text](1.png?raw=true "Main page")
 
-![Alt text](2.png.jpg?raw=true "Manage page")
+![Alt text](2.png?raw=true "Manage page")
