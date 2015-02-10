@@ -1,4 +1,11 @@
-﻿using System;
+﻿// CPSC362 - Software Engineering
+// Property Management application
+// Author: Jeff Bohlin
+// Date: 03-01-2013
+//
+// MainWindow.xaml.cs  - The application's starting window.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +28,4 @@ namespace PropertyManagement
             InitializeComponent();
         }
     }
-
 }

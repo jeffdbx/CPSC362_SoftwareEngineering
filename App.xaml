@@ -1,4 +1,6 @@
-﻿<Application x:Class="PropertyManagement.App"
+﻿<!-- This file interacts with App.xaml.cs.  It controls the default UI styles of the application. -->
+
+<Application x:Class="PropertyManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">

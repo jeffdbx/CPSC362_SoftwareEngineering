@@ -1,4 +1,4 @@
-﻿<!-- This file controls the UI layout of the Manage page of the application -->
+﻿<!-- This file interacts with ManagePage.xaml.cs.  It controls the UI layout of the Manage page. -->
 
 <Page x:Class="PropertyManagement.ManagePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

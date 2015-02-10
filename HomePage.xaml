@@ -1,4 +1,4 @@
-﻿<!-- This file controls the UI layout of the starting home page of the application -->
+﻿<!-- This file interacts with HomePage.xaml.cs.  It controls the UI layout of the Home page. -->
 
 <Page x:Class="PropertyManagement.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

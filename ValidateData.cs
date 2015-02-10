@@ -1,5 +1,11 @@
-﻿// This class is used to validate the user input data in many of the 
-// the application's text boxes.
+﻿// CPSC362 - Software Engineering
+// Property Management application
+// Author: Jeff Bohlin
+// Date: 03-01-2013
+//
+// ValidateData.cs  - This class is used to validate user input data  
+// in many of the the application's text boxes.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

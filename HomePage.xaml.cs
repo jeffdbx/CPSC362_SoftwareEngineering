@@ -1,4 +1,11 @@
-﻿using System;
+﻿// CPSC362 - Software Engineering
+// Property Management application
+// Author: Jeff Bohlin
+// Date: 03-01-2013
+//
+// HomePage.xaml.cs  - The application's home page (property listing).
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
