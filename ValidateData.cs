@@ -5,6 +5,8 @@
 //
 // ValidateData.cs  - This class is used to validate user input data  
 // in many of the the application's text boxes.
+//
+// Reference: http://miteshsureja.blogspot.com/2011/08/validate-data-using-idataerrorinfo-in.html
 
 using System;
 using System.Collections.Generic;
